@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4b48fff0-3ee0-4fee-b2bf-6bdb49d12261" >
+		<http:listener-connection host="0.0.0.0" port="${https.port}" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="73874f48-59b7-43a7-a201-3cd5fa36c381" >
+		<db:my-sql-connection host="${db.host}" port="3306" user="mule" password="mule" database="training" />
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="3829858e-5617-4d48-af13-bacf6b12b178" file="config.yaml" />
+	<api-gateway:autodiscovery apiId="123456" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="35600bf9-1b06-4477-8184-2691b2aca387" flowRef="american-flights-api-main" />
+	<flow name="flight-id-flow" doc:id="4a81aefd-ea66-4c58-89db-27f66c925c28" >
+		<db:select doc:name="Select" doc:id="9898db3c-91e0-4a61-8594-36951ce98117" config-ref="Database_Config">
+			<db:sql><![CDATA[select * from flights where id = :id]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	id: attributes.uriParams.ID}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="6808bade-536a-40d8-b605-a37e3fc6512f">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="332b7e07-9b5b-4fef-8835-176620092cea" message="Flight ID #[payload[0].ID] is processed at #[now()]"/>
+	</flow>
+</mule>
