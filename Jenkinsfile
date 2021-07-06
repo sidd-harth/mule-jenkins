@@ -19,13 +19,13 @@ pipeline{
  		
  		}
  	}
- 	// stage ('Deploy'){
- 	// 	steps {
+ 	stage ('Deploy'){
+ 		steps {
  		
- 	// 			bat 'mvn -f pom.xml package deploy  -Dusername=mule-7 -Dpassword=Qwerty67 -DmuleDeploy'
+ 				sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Qwerty67 -Dwokers=1 -DworkerType=MICRO -DappName=test123sidasd -Denv=Sandbox'
  		
- 	// 	}
- 	// }
+ 		}
+ 	}
  }
 
 }
