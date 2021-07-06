@@ -32,7 +32,7 @@ pipeline{
  	stage ('Deploy'){
  		steps {
  		
- 				sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Qwerty67 -Dwokers=1 -DworkerType=MICRO -DappName=test123sidasd -Denv=Sandbox'
+ 				sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=MICRO -DappName=test123sidasd -Denv=Sandbox'
  		
  		}
  	}
