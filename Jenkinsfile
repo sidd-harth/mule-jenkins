@@ -1,9 +1,8 @@
 pipeline{
  agent any
- // tools {
- //        maven 'M2'
- //        jdk 'JDK'
- //    }
+ tools {
+        maven 'M363'
+    }
 
  stages {
   //  stage('Check Parameters') {
