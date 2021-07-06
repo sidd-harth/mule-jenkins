@@ -50,14 +50,14 @@
 						<muleVersion>4.3.0</muleVersion>
 						<businessGroup>HCL-OPS</businessGroup>
 						<businessGroupId>938319da-95fc-405a-99ad-bab28939ddd0</businessGroupId>
-						<username>{username}</username>
-						<password>{password}</password>
+						<username>${username}</username>
+						<password>${password}</password>
 						<objectStoreV2>true</objectStoreV2>
-						<applicationName>{appName}</applicationName>
-						<environment>{env}</environment>
+						<applicationName>${appName}</applicationName>
+						<environment>${env}</environment>
 						<region>us-east-2</region>
-						<workers>{workers}</workers>
-						<workerType>{workerType}</workerType>
+						<workers>${workers}</workers>
+						<workerType>${workerType}</workerType>
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
 					<sharedLibraries>
