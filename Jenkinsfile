@@ -19,6 +19,16 @@ pipeline{
  		
  		}
  	}
+
+
+  stage ('SonarQube'){
+    steps {
+    
+        sh 'mvn sonar:sonar   -Dsonar.projectKey=ttt   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=0bb732e5b77a673c8a7c5d0ce97712fa863f3ddf -Dsonar.sources=src/'
+    
+    }
+  }
+  
  	stage ('Deploy'){
  		steps {
  		
