@@ -16,7 +16,7 @@ pipeline {
 
     stage('Build Artefact') {
       steps {
-        sh 'echo OK'
+        sh 'mvn clean install'
       }
     }
 
@@ -29,19 +29,23 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
-        sh 'echo OK'
-      }
+        sh 'mvn sonar:sonar   -Dsonar.projectKey=ttt   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=0bb732e5b77a673c8a7c5d0ce97712fa863f3ddf -Dsonar.sources=src/'
+      } timeout(time: 2, unit: 'MINUTES') {
+             script {
+               waitForQualityGate abortPipeline: true
+             }
+         }
     }
 
     stage('Deploy to UAT') {
       steps {
-        sh 'echo OK'
+        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=MICRO -DappName=$appName-uat -Denv=UAT -Dconfig=UAT'
       }
     }
 
     stage('Integration Tests') {
       steps {
-        sh "echo OK"
+        sh "bash integration-test.sh"
       }
     }
 
@@ -55,7 +59,7 @@ pipeline {
 
     stage('Deploy to PROD') {
       steps {
-        sh 'echo OK'
+        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=SMALL -DappName=$appName-prod -Denv=PROD -Dconfig=PROD'
       }
     }
 

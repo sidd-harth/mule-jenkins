@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>boi-hello-world</artifactId>
+	<artifactId>hello-world-devops</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
-	<name>boi-hello-world</name>
+	<name>hello-world-devops</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,21 +32,6 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<!-- <cloudHubDeployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>4.3.0</muleVersion>
-						<businessGroup>HCL-OPS</businessGroup>
-						<businessGroupId>938319da-95fc-405a-99ad-bab28939ddd0</businessGroupId>
-						<username>hcl-ops-2</username>
-						<password>Boi@1234</password>
-						<objectStoreV2>true</objectStoreV2>
-						<applicationName>maven-hello-world</applicationName>
-						<environment>Sandbox</environment>
-						<region>us-east-2</region>
-						<workers>1</workers>
-						<workerType>MICRO</workerType>
-					</cloudHubDeployment> -->
-					
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>4.3.0</muleVersion>
@@ -58,14 +45,11 @@
 						<region>us-east-2</region>
 						<workers>${workers}</workers>
 						<workerType>${workerType}</workerType>
+						<properties>
+							<env>${config}</env>
+						</properties>
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
-					<sharedLibraries>
-						<sharedLibrary>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-						</sharedLibrary>
-					</sharedLibraries>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -82,30 +66,6 @@
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-sockets-connector</artifactId>
 			<version>1.2.1</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.connectors</groupId>
-			<artifactId>mule-db-connector</artifactId>
-			<version>1.9.3</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.48</version>
-		</dependency>
-		<dependency>
-			<groupId>68ef9520-24e9-4cf2-b2f5-620025690913</groupId>
-			<artifactId>training-american-flights-api</artifactId>
-			<version>2.0.1</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-apikit-module</artifactId>
-			<version>1.5.1</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
