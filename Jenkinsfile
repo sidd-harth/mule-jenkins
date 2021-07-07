@@ -29,14 +29,16 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
+        withSonarQubeEnv('Sonarqube') {
         sh 'mvn sonar:sonar   -Dsonar.projectKey=ttt   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=0bb732e5b77a673c8a7c5d0ce97712fa863f3ddf -Dsonar.sources=src/'
       } 
+    }
     }
 
     stage('SonarQube Quality Gate') {
       steps {
         withSonarQubeEnv('Sonarqube') {
-        timeout(time: 2, unit: 'MINUTES') {
+          timeout(time: 2, unit: 'MINUTES') {
              script {
                waitForQualityGate abortPipeline: true
              }
