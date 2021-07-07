@@ -50,7 +50,7 @@ pipeline {
 
     stage('Deploy to UAT') {
       steps {
-        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=MICRO -DappName=$appName-uat -Denv=UAT -Dconfig=UAT'
+        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=MICRO -DappName=$appName-uat-21548 -Denv=UAT -Dconfig=UAT'
       }
     }
 
@@ -70,7 +70,7 @@ pipeline {
 
     stage('Deploy to PROD') {
       steps {
-        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=SMALL -DappName=$appName-prod -Denv=PROD -Dconfig=PROD'
+        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=SMALL -DappName=$appName-prod-21548 -Denv=PROD -Dconfig=PROD'
       }
     }
 

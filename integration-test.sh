@@ -4,7 +4,7 @@
 
 sleep 15s
 
-http_code=$(curl -s -o /dev/null -w "%{http_code}" http://$appName-uat.$cloudhubRegion.$cloudhubHost
+http_code=$(curl -s -o /dev/null -w "%{http_code}" http://$appName-uat-21548.$cloudhubRegion.$cloudhubHost
 
 echo http://$appName.$cloudhubRegion.$cloudhubHost
 
