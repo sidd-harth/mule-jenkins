@@ -16,7 +16,7 @@ pipeline {
 
     stage('Build Artefact') {
       steps {
-        sh 'mvn clean install'
+        sh 'echo OK'
       }
     }
 
@@ -29,20 +29,53 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
-        sh 'mvn sonar:sonar   -Dsonar.projectKey=ttt   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=0bb732e5b77a673c8a7c5d0ce97712fa863f3ddf -Dsonar.sources=src/'
+        sh 'echo OK'
       }
     }
 
     stage('Deploy to UAT') {
       steps {
-        sh 'mvn clean package deploy -DmuleDeploy  -Dusername=hcl-ops-2 -Dpassword=Boi@1234 -Dwokers=1 -DworkerType=MICRO -DappName=$appName-uat -Denv=UAT'
+        sh 'echo OK'
       }
     }
 
     stage('Integration Tests') {
       steps {
-        sh "bash integration-test.sh"
+        sh "echo OK"
       }
     }
+
+    stage('Prompte to PROD?') {
+      steps {
+        timeout(time: 2, unit: 'DAYS') {
+          input 'Do you want to Approve the Deployment to Production Environment?'
+        }
+      }
+    }
+
+    stage('Deploy to PROD') {
+      steps {
+        sh 'echo OK'
+      }
+    }
+
+    stage('Integration Tests - PROD') {
+      steps {
+        sh 'echo Integration Testing is Success'
+      }
+    }
+
+    stage('Smoke Tests - PROD') {
+      steps {
+        sh 'echo Smoke Testing is Success'
+      }
+    }
+    
+    stage('Stress Tests - PROD') {
+      steps {
+        sh 'echo Stress Testing is Success'
+      }
+    }
+
   }
 }
